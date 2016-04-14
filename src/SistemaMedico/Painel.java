@@ -162,14 +162,14 @@ public class Painel extends javax.swing.JPanel {
     }//GEN-LAST:event_enderecoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Pessoa pes = new Pessoa(1, nome.getText(), rg.getText(), cpf.getText(), email.getText(),endereco.getText());
+       /* Pessoa pes = new Pessoa(1, nome.getText(), rg.getText(), cpf.getText(), email.getText(),endereco.getText()/*);
         try {
             PessoaDAO.criarPessoa(pes);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Painel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Painel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

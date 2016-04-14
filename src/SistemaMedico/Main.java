@@ -5,6 +5,7 @@
  */
 package SistemaMedico;
 
+import static Connection.GeralDAO.executarConsultaSemParaMetros;
 import Connection.PessoaDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,8 +17,8 @@ import java.util.logging.Logger;
  */
 public class Main {
     public static void main(String[] args){
-        Pessoa p = new Pessoa(1234, "Luan", "000.000.0", "080.000.070-00", "luan@luan.com", "Brasil");
-      
+       // Pessoa p = new Pessoa(1234, "Luan", "000.000.0", "080.000.070-00", "luan@luan.com", "Brasil");
+       PessoaDAO pessoa = new PessoaDAO();
         try {
             /*
             try {
@@ -28,10 +29,8 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }*/
             
-            PessoaDAO.popularPessoas();
-        } catch (SQLException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+            System.out.println("TOTAL \n"+pessoa.popularPessoas(executarConsultaSemParaMetros(pessoa.SELECT_TODAS_PESSOAS.toString())).toString());
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 

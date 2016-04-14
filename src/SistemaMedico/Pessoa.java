@@ -9,17 +9,25 @@ public class Pessoa {
     private String cpf;
     private String email;
     private String endereco;
-
+    private String senha;
+    private String matricula;
+    private String telefone;
+    private String numeroConselho;
+    
+    
     public Pessoa(){
     }
     
-    public Pessoa(int id_pessoa, String nome, String rg, String cpf, String email, String endereco){
+    public Pessoa(int id_pessoa, String nome, String rg, String cpf, String email, String endereco, String telefone, String senha, String numeroConselho){
         this.id_pessoa = id_pessoa;
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.email = email;
         this.endereco = endereco;
+        this.telefone =  telefone;
+        this.senha = senha;
+        this.numeroConselho = numeroConselho;
     }
 
     public int getId_pessoa() {
@@ -69,6 +77,8 @@ public class Pessoa {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+    
+    
 
     @Override
     public int hashCode() {
@@ -119,6 +129,39 @@ public class Pessoa {
     public String toString() {
         return "Pessoa{" + "id_pessoa=" + id_pessoa + ", nome=" + nome + ", rg=" + rg + ", cpf=" + cpf + ", email=" + email + ", endereco=" + endereco + '}';
     }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getNumeroConselho() {
+        return numeroConselho;
+    }
+
+    public void setNumeroConselho(String numeroConselho) {
+        this.numeroConselho = numeroConselho;
+    }
+    
     
     
 }
