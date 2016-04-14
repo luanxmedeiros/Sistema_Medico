@@ -17,9 +17,14 @@ import javax.swing.JOptionPane;
 
 public class GeralDAO {
     
-    public void executarComando(String sql,Object...parametros){
+    public static void executarComando(String sql,Object...parametros){
+        Connection con = null;
         try {            
-            Connection con = FabricaConexao.getConexao();
+            try {
+                con = FabricaConexao.getConexao();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GeralDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
             PreparedStatement comando = con.prepareStatement(sql);            
             for (int i=1;i<=parametros.length;i++){
                 comando.setObject(i, parametros[i-1]);
@@ -35,10 +40,15 @@ public class GeralDAO {
   
     }
     
-    public int executarComandoComRetornoID(String sql,Object...parametros){
+    public static int executarComandoComRetornoID(String sql,Object...parametros){
         Integer id = null;
-        try {            
-            Connection con = FabricaConexao.getConexao();
+        Connection con = null ;
+        try {                
+            try {
+                con = FabricaConexao.getConexao();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GeralDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
             PreparedStatement comando = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             for (int i=1;i<=parametros.length;i++){
                 comando.setObject(i, parametros[i-1]);
@@ -47,36 +57,39 @@ public class GeralDAO {
             ResultSet resultado = comando.getGeneratedKeys();
             
             if(resultado.next()){
-                id = resultado.getInt(1);                
+                id = resultado.getInt(1);
+                System.out.println("ID GERADO: "+id);
             }	            
             FabricaConexao.fecharConexao(con);
-            //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar! "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar: "+ex);
             Logger.getLogger(GeralDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
   
         return id;
     }    
     
-    public ResultSet executarConsulta(String sql, Object...parametros) {
-        Connection con = FabricaConexao.getConexao();
-        PreparedStatement comando;
+    public static ResultSet executarConsulta(String sql, Object...parametros) {
+        Connection con;
+        PreparedStatement comando = null;
         ResultSet resultado = null;
         try {
+            con = FabricaConexao.getConexao();
             comando = con.prepareStatement(sql);
-        for (int i=1;i<=parametros.length;i++){
-            comando.setObject(i, parametros[i-1]);
-        }
-        resultado = comando.executeQuery();
-        FabricaConexao.fecharConexao(con);            
-        } catch (SQLException ex) {
+            for (int i=1;i<=parametros.length;i++){
+                comando.setObject(i, parametros[i-1]);
+            } 
+            resultado = comando.executeQuery();
+            FabricaConexao.fecharConexao(con);            
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(GeralDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+
         return resultado;
-    }        
+    }    
     
     public static ResultSet executarConsultaSemParaMetros(String sql) throws SQLException, ClassNotFoundException{
         Connection con = FabricaConexao.getConexao();

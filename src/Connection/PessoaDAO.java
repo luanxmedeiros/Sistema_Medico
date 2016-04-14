@@ -12,22 +12,21 @@ import javax.swing.JOptionPane;
 
 public class PessoaDAO extends GeralDAO  {
     //Variáveis constantes para consultas e inserções    
-    public final String SELECT_TODAS_PESSOAS = "select tb_pessoa.* from tb_pessoa;";
-    public final String SELECT_PACIENTE_ALUNO_PORIDPESSOA = "select tb_pessoa.*, tb_paciente_aluno.* from tb_pessoa join tb_paciente_aluno on tb_pessoa.id_pessoa = tb_paciente_aluno.id_pessoa where tb_pessoa.id_pessoa=?;";
-    public final String LOGIN_RECEPCIONISTA = "select tb_recepcionista.* from tb_recepcionista where tb_recepcionista.id_pessoa=? and tb_recepcionista.senha=?;";
-    public final String LOGIN_NUTRICIONISTA = "select tb_nutricionista.* from tb_nutricionista where tb_nutricionista.id_pessoa=? and tb_nutricionista.senha=?;";
-    public final String LOGIN_MEDICO = "select tb_medico.* from tb_medico where tb_medico.id_pessoa=? and tb_medico.senha=?;";
-    public final String LOGIN_DENTISTA = "select tb_dentista.* from tb_dentista where tb_dentista.id_pessoa=? and tb_dentista.senha=?;";        
-    public final String INSERIR_PESSOA = "insert into tb_pessoa (rg,cpf,email,nome,endereco) VALUES (?,?,?,?,?);";
-    public final String INSERIR_MEDICO = "insert into tb_medico (id_pessoa, senha, crm) values (?,?,?);";
-    public final String INSERIR_NUTRICIONISTA = "insert into tb_nutricionista (id_pessoa, senha, crn) values (?,?,?);";
-    public final String INSERIR_DENTISTA = "insert into tb_dentista (id_pessoa, senha, cro) values (?,?,?);";    
-    public final String INSERIR_PRONTUARIO = "insert INTO tb_prontuario (sexo, idade, observacoes,id_pessoa) VALUES (?,?,?,?);";
-    public final String INSERIR_AGENDAMENTO = "insert INTO tb_prontuario (sexo, idade, observacoes,id_pessoa) VALUES (?,?,?,?);";
+    public static final String SELECT_TODAS_PESSOAS = "select tb_pessoa.* from tb_pessoa;";
+    public static final String SELECT_PACIENTE_ALUNO_PORIDPESSOA = "select tb_pessoa.*, tb_paciente_aluno.* from tb_pessoa join tb_paciente_aluno on tb_pessoa.id_pessoa = tb_paciente_aluno.id_pessoa where tb_pessoa.id_pessoa=?;";
+    public static final String LOGIN_RECEPCIONISTA = "select tb_recepcionista.* from tb_recepcionista where tb_recepcionista.id_pessoa=? and tb_recepcionista.senha=?;";
+    public static final String LOGIN_NUTRICIONISTA = "select tb_nutricionista.* from tb_nutricionista where tb_nutricionista.id_pessoa=? and tb_nutricionista.senha=?;";
+    public static final String LOGIN_MEDICO = "select tb_medico.* from tb_medico where tb_medico.id_pessoa=? and tb_medico.senha=?;";
+    public static final String LOGIN_DENTISTA = "select tb_dentista.* from tb_dentista where tb_dentista.id_pessoa=? and tb_dentista.senha=?;";        
+    public static final String INSERIR_PESSOA = "insert into tb_pessoa (rg,cpf,email,nome,endereco) VALUES (?,?,?,?,?);";
+    public static final String INSERIR_MEDICO = "insert into tb_medico (id_pessoa, senha, crm) values (?,?,?);";
+    public static final String INSERIR_NUTRICIONISTA = "insert into tb_nutricionista (id_pessoa, senha, crn) values (?,?,?);";
+    public static final String INSERIR_DENTISTA = "insert into tb_dentista (id_pessoa, senha, cro) values (?,?,?);";    
+    public static final String INSERIR_PRONTUARIO = "insert INTO tb_prontuario (sexo, idade, observacoes,id_pessoa) VALUES (?,?,?,?);";
+    public static final String INSERIR_AGENDAMENTO = "insert INTO tb_prontuario (sexo, idade, observacoes,id_pessoa) VALUES (?,?,?,?);";
     
     
-    public boolean loginProfissional(Pessoa p) {        
-           
+    public boolean loginProfissional(Pessoa p) {                   
             
         try {
             ResultSet resultado = executarConsulta(LOGIN_NUTRICIONISTA.toString(), p.getId_pessoa(), p.getSenha());
