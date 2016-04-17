@@ -7,15 +7,16 @@ public class Prontuario {
     private String sexo;
     private int idade;
     private String exame_fisico;
+    private int id_pessoa;
 
     public Prontuario() {
     }
 
-    public Prontuario(int id_prontuario, String sexo, int idade, String exame_fisico) {
-        this.id_prontuario = id_prontuario;
+    public Prontuario(String sexo, int idade, String exame_fisico, int id_pessoa) {        
         this.sexo = sexo;
         this.idade = idade;
         this.exame_fisico = exame_fisico;
+        this.id_pessoa = id_pessoa;
     }
 
     public int getId_prontuario() {
@@ -85,6 +86,14 @@ public class Prontuario {
             return false;
         }
         return true;
+    }
+
+    public int getId_pessoa() {
+        return id_pessoa;
+    }
+
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
     }
 
     
